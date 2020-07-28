@@ -94,6 +94,7 @@ class DDpgAgent():
         self.actor.optimizer.zero_grad()
         actor_loss = -self.critic.forward(states, self.actor.forward(states))
         actor_loss = T.mean(actor_loss)
+        actor_loss.backward()
         self.actor.optimizer.step()
         # print("im inside the learn function >>>>>>")
         self.update_network_parameters()
